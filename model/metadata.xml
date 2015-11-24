@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0"
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZODATA_TEST1_SRV" xml:lang="en" sap:schema-version="1"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="InspLot" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Insplot"/>
+                </Key>
+                <Property Name="Insplot" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Inspection lot" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OrderNo" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Order" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="TxtMat" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Mat. descrip." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="InspLotOpSet" Relationship="ZODATA_TEST1_SRV.InspLot_InspLotOp" FromRole="FromRole_InspLot_InspLotOp" ToRole="ToRole_InspLot_InspLotOp"/>
+            </EntityType>
+            <EntityType Name="InspLotOp" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Insplot"/>
+                    <PropertyRef Name="Inspoper"/>
+                </Key>
+                <Property Name="Insplot" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Inspection lot" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Inspoper" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Operation" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="TxtOper" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Short text" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <NavigationProperty Name="InspLot" Relationship="ZODATA_TEST1_SRV.InspLot_InspLotOp" FromRole="ToRole_InspLot_InspLotOp" ToRole="FromRole_InspLot_InspLotOp"/>
+                <NavigationProperty Name="InspLotOpCharSet" Relationship="ZODATA_TEST1_SRV.InspLotOp_InspLotOpChar" FromRole="FromRole_InspLotOp_InspLotOpChar" ToRole="ToRole_InspLotOp_InspLotOpChar"/>
+            </EntityType>
+            <EntityType Name="InspLotOpChar" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Insplot"/>
+                    <PropertyRef Name="Inspoper"/>
+                    <PropertyRef Name="Inspchar"/>
+                </Key>
+                <Property Name="Insplot" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Inspection lot" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Inspoper" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Operation" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Inspchar" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Charac. no." sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="CharDescr" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Short text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SelSet1" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Selected set" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ClosedCh" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Close" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EvaluatedCh" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Copy valuation" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EvaluationCh" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Valuation" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ErrClassCh" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Defect class" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ValidValsCh" Type="Edm.String" Nullable="false" MaxLength="7" sap:label="Valid values" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NonconfCh" Type="Edm.String" Nullable="false" MaxLength="7" sap:label="Nonconf. Units" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Code1Ch" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Code" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CodeGrp1Ch" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Code group" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="InspLot_InspLotOp" sap:content-version="1">
+                <End Type="ZODATA_TEST1_SRV.InspLot" Multiplicity="1" Role="FromRole_InspLot_InspLotOp"/>
+                <End Type="ZODATA_TEST1_SRV.InspLotOp" Multiplicity="*" Role="ToRole_InspLot_InspLotOp"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_InspLot_InspLotOp">
+                        <PropertyRef Name="Insplot"/>
+                    </Principal>
+                    <Dependent Role="ToRole_InspLot_InspLotOp">
+                        <PropertyRef Name="Insplot"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="InspLotOp_InspLotOpChar" sap:content-version="1">
+                <End Type="ZODATA_TEST1_SRV.InspLotOp" Multiplicity="1" Role="FromRole_InspLotOp_InspLotOpChar"/>
+                <End Type="ZODATA_TEST1_SRV.InspLotOpChar" Multiplicity="*" Role="ToRole_InspLotOp_InspLotOpChar"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_InspLotOp_InspLotOpChar">
+                        <PropertyRef Name="Insplot"/>
+                        <PropertyRef Name="Inspoper"/>
+                    </Principal>
+                    <Dependent Role="ToRole_InspLotOp_InspLotOpChar">
+                        <PropertyRef Name="Insplot"/>
+                        <PropertyRef Name="Inspoper"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZODATA_TEST1_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="InspLotOpSet" EntityType="ZODATA_TEST1_SRV.InspLotOp" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:pageable="false" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="InspLotOpCharSet" EntityType="ZODATA_TEST1_SRV.InspLotOpChar" sap:creatable="false" sap:deletable="false" sap:pageable="false" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="InspLotSet" EntityType="ZODATA_TEST1_SRV.InspLot" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="InspLot_InspLotOpSet" Association="ZODATA_TEST1_SRV.InspLot_InspLotOp" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="InspLotSet" Role="FromRole_InspLot_InspLotOp"/>
+                    <End EntitySet="InspLotOpSet" Role="ToRole_InspLot_InspLotOp"/>
+                </AssociationSet>
+                <AssociationSet Name="InspLotOp_InspLotOpCharSet" Association="ZODATA_TEST1_SRV.InspLotOp_InspLotOpChar" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="InspLotOpSet" Role="FromRole_InspLotOp_InspLotOpChar"/>
+                    <End EntitySet="InspLotOpCharSet" Role="ToRole_InspLotOp_InspLotOpChar"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="./destinations/STH/sap/opu/odata/sap/ZODATA_TEST1_SRV/$metadata"
+                xmlns:atom="http://www.w3.org/2005/Atom"/>
+                <atom:link rel="latest-version" href="./destinations/STH/sap/opu/odata/sap/ZODATA_TEST1_SRV/$metadata"
+                    xmlns:atom="http://www.w3.org/2005/Atom"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>
