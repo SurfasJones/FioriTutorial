@@ -1,4 +1,4 @@
-<mvc:View controllerName="tut.qm.view.NotFound" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+<mvc:View controllerName="tut.qm.controller.NotFound" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<Page enableScrolling="false" title="{i18n>notFoundTitle}">
 		<content>
 			<Text class="spacerTop" text="{i18n>notFoundText}" textAlign="Center" width="100%"/>

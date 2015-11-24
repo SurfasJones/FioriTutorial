@@ -1,4 +1,4 @@
-sap.ui.core.mvc.Controller.extend("tut.qm.view.Master2", {
+sap.ui.core.mvc.Controller.extend("tut.qm.controller.Master2", {
 
 	onInit: function() {
 		this.getRouter().attachRouteMatched(this.onRouteMatched, this);

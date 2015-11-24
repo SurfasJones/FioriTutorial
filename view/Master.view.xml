@@ -1,4 +1,4 @@
-<mvc:View controllerName="tut.qm.view.Master" displayBlock="true" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+<mvc:View controllerName="tut.qm.controller.Master" displayBlock="true" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<Page id="master1Page" title="{i18n>master1Title}">
 		<subHeader>
 			<Bar id="master1SearchBar">

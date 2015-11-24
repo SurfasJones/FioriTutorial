@@ -1,4 +1,4 @@
-<mvc:View controllerName="tut.qm.view.Detail" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+<mvc:View controllerName="tut.qm.controller.Detail" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
 	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<Page class="sapUiFioriObjectPage" id="detailPage" navButtonPress="onNavBack" showNavButton="{device>/isPhone}" title="{i18n>detailTitle}">
 		<content>

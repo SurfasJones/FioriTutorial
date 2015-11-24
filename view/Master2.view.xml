@@ -1,4 +1,4 @@
-<mvc:View controllerName="tut.qm.view.Master2" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+<mvc:View controllerName="tut.qm.controller.Master2" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
 	<Page id="master2Page" navButtonPress="onNavBack" showNavButton="true" title="{i18n>master2Title}">
 		<subHeader>
 			<Bar id="master2SearchBar">

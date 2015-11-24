@@ -1,1 +1,0 @@
-sap.ui.core.mvc.Controller.extend("tut.qm.view.App", {});

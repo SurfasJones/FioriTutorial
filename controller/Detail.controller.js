@@ -1,4 +1,4 @@
-sap.ui.core.mvc.Controller.extend("tut.qm.view.Detail", {
+sap.ui.core.mvc.Controller.extend("tut.qm.control.Detail", {
 
 	onInit: function() {
 		this.oInitialLoadFinishedDeferred = jQuery.Deferred();
