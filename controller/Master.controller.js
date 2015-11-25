@@ -61,9 +61,7 @@ sap.ui.core.mvc.Controller.extend("tut.qm.controller.Master", {
 		if (searchString && searchString.length > 0) {
 			filters = [new sap.ui.model.Filter("OrderNo", sap.ui.model.FilterOperator.Contains, searchString)];
 		}
-
 		// Update list binding
-		console.log(this.getView().byId("master1List").getBinding("items"));
 		this.getView().byId("master1List").getBinding("items").filter(filters);
 	},
 

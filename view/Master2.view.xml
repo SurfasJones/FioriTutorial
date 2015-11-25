@@ -9,8 +9,8 @@
 			</Bar>
 		</subHeader>
 		<content>
-			<List growing="true" growingScrollToLoad="true" id="master2List" items="{InspLotOpSet}" mode="{device>/listMode}"
-				noDataText="{i18n>masterListNoDataText}" select="onSelect">
+			<List growing="true" growingScrollToLoad="true" id="master2List" items="{path: 'InspLotOpSet', filters: [{path: 'Inspoper', operator: 'BT', value1: '0100', value2: '0499'}]}" mode="{device>/listMode}"
+				noDataText="{i18n>masterListNoDataText}" select="onSelect"> <!--{InspLotOpSet}-->
 				<items>
 					<ObjectListItem id="master2ListItem" number="" numberUnit="" press="onSelect" title="{TxtOper}" type="{device>/listItemType}">
 						<attributes>

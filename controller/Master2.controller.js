@@ -34,11 +34,20 @@ sap.ui.core.mvc.Controller.extend("tut.qm.controller.Master2", {
 
 			var oEventBus = this.getEventBus();
 			var that = this;
+			// this.byId("master2List").attachUpdateFinished(function() {
+			// 	that.selectFirstItem();
+			// 	oEventBus.publish("Master2", "LoadFinished", {
+			// 		oListItem: that.getView().byId("master2List").getItems()[0]
+			// 	});
+			// });
 			this.byId("master2List").attachUpdateFinished(function() {
-				that.selectFirstItem();
-				oEventBus.publish("Master2", "LoadFinished", {
-					oListItem: that.getView().byId("master2List").getItems()[0]
-				});
+				var m2List = oEvent.oSource;
+				if (!m2List.getSelectedItem()) {
+					that.selectFirstItem();
+					oEventBus.publish("Master2", "LoadFinished", {
+						oListItem: m2List.getItems()[0]
+					});
+				}
 			});
 		}
 

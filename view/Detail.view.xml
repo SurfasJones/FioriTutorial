@@ -1,37 +1,44 @@
-<mvc:View controllerName="tut.qm.controller.Detail" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
-	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
-	<Page class="sapUiFioriObjectPage" id="detailPage" navButtonPress="onNavBack" showNavButton="{device>/isPhone}" title="{i18n>detailTitle}">
+<mvc:View xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:c="tut.qm.control" controllerName="tut.qm.controller.Detail">
+	<Page class="sapUiFioriObjectPage" id="detailPage" navButtonPress="onNavBack" showNavButton="{device&gt;/isPhone}" title="{i18n&gt;detailTitle}">
 		<content>
 			<ObjectHeader number="" numberUnit="" title="{TxtOper}">
 				<attributes>
-					<ObjectAttribute text=""/>
+					<ObjectAttribute text="{InspLot/OrderNo} - {InspLot/TxtMat}"/>
 				</attributes>
 				<firstStatus>
 					<ObjectStatus text=""/>
 				</firstStatus>
 			</ObjectHeader>
-			<IconTabBar id="idIconTabBar" select="onDetailSelect">
-				<items>
-					<IconTabFilter icon="sap-icon://hint" key="Details">
-						<content>
-							<f:SimpleForm columnsL="1" columnsM="1" editable="false" emptySpanL="4" emptySpanM="4" id="detailForm" labelSpanL="3" labelSpanM="3"
-								layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
-								<f:content>
-									<Label id="label1" text="TxtOper"/>
-									<Text id="text1" text="{TxtOper}"/>
-									<Label id="label2" text=""/>
-									<Text id="text2" text=""/>
-									<Label id="label3" text=""/>
-									<Text id="text3" text=""/>
-								</f:content>
-							</f:SimpleForm>
-						</content>
-					</IconTabFilter>
-				</items>
-			</IconTabBar>
+			<Table noDataText="{i18n&gt;detailListNoDataText}" id="__table0" items="{InspLotOpCharSet}">
+			    <customData>
+			        <core:CustomData key="sap-ui-fastnavgroup" value="true" writeToDom="true" id="__data2"/>
+			    </customData>
+			    <items>
+			        <ColumnListItem counter="0" id="__item0" cells="{/InspLotOpSet}" vAlign="Middle">
+			            <cells>
+			                <Text text="{CharDescr}" maxLines="0" id="__text2"/>
+			            </cells>
+			        </ColumnListItem>
+			        <ColumnListItem counter="0" id="__item1" vAlign="Middle">
+			            <cells>
+			            <c:ResultControl change="onResultChanged" closedch="{ClosedCh}"  
+						code1ch="{Code1Ch}" id="idDetailResultCont" nokcode="NOK" okcode="OK"/>
+			            </cells>
+			        </ColumnListItem></items>
+			    <columns>
+			        <Column id="__column0">
+			            <header>
+			                <Label text="{i18n&gt;detailCol0Header}" id="__label0"/>
+			            </header>
+			        </Column>
+			        <Column id="__column1">
+			            <header>
+			                <Label text="{i18n&gt;detailCol1Header}" id="__label1"/>
+			            </header>
+			        </Column></columns></Table>
 		</content>
 		<footer>
-			<Toolbar></Toolbar>
+			<Toolbar/>
 		</footer>
 	</Page>
 </mvc:View>

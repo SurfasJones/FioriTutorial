@@ -39,7 +39,8 @@ sap.ui.core.mvc.Controller.extend("tut.qm.control.Detail", {
 
 	bindView: function(sEntityPath) {
 		var oView = this.getView();
-		oView.bindElement(sEntityPath);
+		// oView.bindElement(sEntityPath);
+		oView.bindElement(sEntityPath, {expand: "InspLot"});
 
 		//Check if the data is already on the client
 		if (!oView.getModel().getData(sEntityPath)) {
