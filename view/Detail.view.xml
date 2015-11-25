@@ -38,7 +38,11 @@
 			        </Column></columns></Table>
 		</content>
 		<footer>
-			<Toolbar/>
+			<Toolbar>
+			<ToolbarSpacer/>
+				<Button id="idBtnCancel" press="onCancelPressed" text="{i18n>btnCancel}" type="Reject" enabled="{appProperties>/btnSaveEnabled}"/>  
+				<Button id="idBtnSave" press="onSavePressed" text="{i18n>btnSave}" type="Accept" enabled="{appProperties>/btnSaveEnabled}"/>  
+			</Toolbar>
 		</footer>
 	</Page>
 </mvc:View>

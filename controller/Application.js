@@ -3,8 +3,9 @@
 */
 sap.ui.define([
 	"sap/ui/base/Object",
-	"sap/ui/model/json/JSONModel"
-], function(Object, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/m/MessageBox"
+], function(Object, JSONModel, MessageBox) {
 	"use strict";
 	return Object.extend("tut.qm.controller.Application", {
 		// This class serves as controller for the whole App  
@@ -26,6 +27,36 @@ sap.ui.define([
 				//"key": {CharDescr: "desc1", ...}          // contains changed characteristic entities  
 			});
 			this._oComponent.setModel(this._oDraftModel, "draftModel");
+		},
+		onDetailCancelPressed: function(oEvent) {
+			this.discardDetailChanges();
+		},
+		discardDetailChanges: function(fnAfterDiscard) {
+			var that = this;
+			// Show cancel dialogue, handle response, call fnAfterDiscard if set  
+			if (this._oAppModel.getProperty("/btnSaveEnabled")) {
+				// Opens the confirmation dialog  
+				var i18n = this._oComponent.getModel("i18n").getResourceBundle();
+				MessageBox.show(i18n.getText("msgDiscardChangesQuestion"), {
+					icon: MessageBox.Icon.WARNING,
+					title: i18n.getText("msgDiscardChangesTitle"),
+					actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+					onClose: function(oAction) {
+						if (oAction === MessageBox.Action.OK) {
+							// Perform clean-up actions  
+							that.setDetailChangingState(false);
+							//  
+							if (fnAfterDiscard) {
+								fnAfterDiscard();
+							}
+						}
+					}
+				});
+			} else {
+				if (fnAfterDiscard) {
+					fnAfterDiscard();
+				}
+			}
 		}
 	});
 });

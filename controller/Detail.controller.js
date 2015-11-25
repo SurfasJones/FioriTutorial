@@ -40,7 +40,9 @@ sap.ui.core.mvc.Controller.extend("tut.qm.control.Detail", {
 	bindView: function(sEntityPath) {
 		var oView = this.getView();
 		// oView.bindElement(sEntityPath);
-		oView.bindElement(sEntityPath, {expand: "InspLot"});
+		oView.bindElement(sEntityPath, {
+			expand: "InspLot"
+		});
 
 		//Check if the data is already on the client
 		if (!oView.getModel().getData(sEntityPath)) {
@@ -87,6 +89,10 @@ sap.ui.core.mvc.Controller.extend("tut.qm.control.Detail", {
 		sap.ui.core.UIComponent.getRouterFor(this).navTo("detail", {
 			entity: oEvent.getSource().getBindingContext().getPath().slice(1)
 		}, true);
+	},
+
+	onCancelPressed: function(oEvent) {
+		this._oApplicationController.onDetailCancelPressed(oEvent);
 	},
 
 	getEventBus: function() {
