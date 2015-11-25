@@ -1,5 +1,6 @@
 jQuery.sap.declare("tut.qm.Component");
 jQuery.sap.require("tut.qm.MyRouter");
+jQuery.sap.require("tut.qm.controller.Application");
 
 sap.ui.core.UIComponent.extend("tut.qm.Component", {
 	metadata: {
@@ -62,7 +63,7 @@ sap.ui.core.UIComponent.extend("tut.qm.Component", {
 
 	init: function() {
 		sap.ui.core.UIComponent.prototype.init.apply(this, arguments);
-
+		
 		var mConfig = this.getMetadata().getConfig();
 
 		// Always use absolute paths relative to our own component
@@ -104,6 +105,9 @@ sap.ui.core.UIComponent.extend("tut.qm.Component", {
 		this.setModel(oDeviceModel, "device");
 
 		this.getRouter().initialize();
+		
+		this._oApplicationController = new tut.qm.controller.Application(this);  
+		this._oApplicationController.init();  
 
 	},
 
