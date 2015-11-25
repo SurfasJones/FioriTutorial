@@ -95,6 +95,10 @@ sap.ui.core.mvc.Controller.extend("tut.qm.control.Detail", {
 		this._oApplicationController.onDetailCancelPressed(oEvent);
 	},
 
+	onSavePressed: function(oEvent) {
+		this._oApplicationController.onDetailSavePressed(oEvent);
+	},
+
 	getEventBus: function() {
 		return sap.ui.getCore().getEventBus();
 	},

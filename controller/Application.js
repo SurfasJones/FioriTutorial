@@ -12,6 +12,7 @@ sap.ui.define([
 		constructor: function(oComponent) {
 			this._oComponent = oComponent;
 		},
+
 		init: function() {
 			this._oAppModel = new JSONModel({
 				applicationController: this,
@@ -28,9 +29,11 @@ sap.ui.define([
 			});
 			this._oComponent.setModel(this._oDraftModel, "draftModel");
 		},
+
 		onDetailCancelPressed: function(oEvent) {
 			this.discardDetailChanges();
 		},
+
 		discardDetailChanges: function(fnAfterDiscard) {
 			var that = this;
 			// Show cancel dialogue, handle response, call fnAfterDiscard if set  
@@ -56,6 +59,58 @@ sap.ui.define([
 				if (fnAfterDiscard) {
 					fnAfterDiscard();
 				}
+			}
+		},
+		onDetailSavePressed: function(oEvent) {
+			this._oAppModel.setProperty("/btnSaveEnabled", false); // keep it busy still  
+			//  
+			var oModel = this._oComponent.getModel();
+			var batchChanges = [];
+			oModel.clearBatch();
+
+			var errClassCh = this._oAppModel.getProperty("/errClassCh");
+			for (var key in this._oDraftModel.oData) {
+				var entry = {};
+				var bCon = this._oDraftModel.createBindingContext("/" + key);
+				entry.ClosedCh = this._oAppModel.getProperty("/sampleCloseOnSave");
+				entry.EvaluatedCh = "X";
+				entry.ValidValsCh = "1";
+				entry.CodeGrp1Ch = bCon.getProperty("SelSet1");
+				if ((entry.Code1Ch = bCon.getProperty("Code1Ch")) === "OK") { // accept  
+					entry.EvaluationCh = "A";
+					entry.ErrClassCh = "";
+					entry.NonconfCh = "";
+				} else { // reject  
+					entry.EvaluationCh = "R";
+					entry.ErrClassCh = errClassCh;
+					entry.NonconfCh = "1";
+				}
+				batchChanges.push(oModel.createBatchOperation(bCon.sPath, "MERGE", entry, undefined));
+			}
+			//  
+			this.setDetailChangingState(false); // also clears busyForDetailChange  
+			// async  
+			if (batchChanges.length) {
+				oModel.addBatchChangeOperations(batchChanges);
+				oModel.submitBatch(function(oData, oResponse, aErrorResponses) { // request successfully sent  
+					// Homework: implement error handling  
+					//   1869434 - Details for working with OData $batch  
+					// Homework: internationalize the below texts  
+					MessageBox.show(
+						oData.__batchResponses[0].__changeResponses.length +
+						(oData.__batchResponses[0].__changeResponses.length <= 1 ?
+							" characteristic" : " characteristics") + " updated", {
+							icon: sap.m.MessageBox.Icon.SUCCESS,
+							title: "Batch Update",
+							actions: [sap.m.MessageBox.Action.OK]
+						});
+				}, function(oError) { // invalid request  
+					sap.m.MessageBox.show("Invalid batch update request", {
+						icon: sap.m.MessageBox.Icon.ERROR,
+						title: "Batch Update",
+						actions: [sap.m.MessageBox.Action.OK]
+					});
+				});
 			}
 		}
 	});
