@@ -55,7 +55,7 @@ sap.ui.core.mvc.Controller.extend("tut.qm.controller.Master", {
 
 	onSearch: function() {
 		// Add search filter
-		debugger;
+		
 		var filters = [];
 		var searchString = this.getView().byId("master1SearchField").getValue();
 		if (searchString && searchString.length > 0) {
@@ -63,6 +63,7 @@ sap.ui.core.mvc.Controller.extend("tut.qm.controller.Master", {
 		}
 
 		// Update list binding
+		console.log(this.getView().byId("master1List").getBinding("items"));
 		this.getView().byId("master1List").getBinding("items").filter(filters);
 	},
 
